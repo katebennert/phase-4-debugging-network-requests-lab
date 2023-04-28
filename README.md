@@ -63,11 +63,23 @@ developing your own process.
 - Add a new toy when the toy form is submitted
 
   - How I debugged:
+    - tried to submit form, got back a 500 error
+    - checked rails log: NameError (unitialized constant ToysController::Toys)
+    - Toys needed to be Toy
 
 - Update the number of likes for a toy
 
   - How I debugged:
+    - clicked the button got unexpected end of json error which means we are not getting any json back from the server and trying to use json() method on it
+    - added render json: to the update method
+    - got a 500 internal sever error so looked in the server log
+    - found the error with unpermitted params
+    - realized i sent the wrong status code back and changed it to :accepted lol
 
 - Donate a toy to Goodwill (and delete it from our database)
 
   - How I debugged:
+    - clicked the donate button, got a 404 error not found
+    - probably a route not existing
+    - went to routes.rb and added :destroy
+    - then remembered i could just take off the only statement becuase it's full crud
